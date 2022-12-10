@@ -1,17 +1,30 @@
+<!DOCTYPE html>
 <html>
-<body onload = "load()">
-<script>
-  function load(){ 
+<head>
+</head>
 
-     try {
-       var ax = new ActiveXObject("WScript.Network");
-       alert('User: ' + ax.UserName );
-       alert('Computer: ' + ax.ComputerName);
-     }
-     catch (e) {
-       document.write('Permission to access computer name is denied' + '<br />');
-     } 
-  }
+<body onload = "load()">
+
+<script type="text/javascript">
+
+function load()
+{ 
+
+try
+{
+var ax = new ActiveXObject("WScript.Network");
+alert('User: ' + ax.UserName );
+alert('Computer: ' + ax.ComputerName);
+}
+catch (e)
+{
+document.write('Permission to access computer name is denied' + '<br />');
+}
+
+} 
+
 </script>
+
 </body>
+
 </html>
