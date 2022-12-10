@@ -1,30 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Errors in geolocation</title>
+<style>
+	.gfg {
+	font-size: 40px;
+	font-weight: bold;
+	color: #009900;
+	margin-left: 20px;
+	}
+
+	.geeks {
+    margin-top: 250px;
+	margin-left: 600px;
+	}
+
+	p {
+	font-size: 20px;
+	margin-left: 535px;
+	}
+</style>
 </head>
+<body>
 
-<body onload = "load()">
+<button class="geeks" onclick="getlocation()">
+	Click
+</button>
+<p id="demo1"></p>
 
-<script type="text/javascript">
+<script>
+	var variable1 = document.getElementById("demo1");
 
-function load()
-{ 
+	function getlocation() {
+	navigator.geolocation.getCurrentPosition(showLoc, errHand);
+	}
 
-try
-{
-var ax = new ActiveXObject("WScript.Network");
-alert('User: ' + ax.UserName );
-alert('Computer: ' + ax.ComputerName);
-}
-catch (e)
-{
-document.write('Permission to access computer name is denied' + '<br />');
-}
+	function showLoc(pos) {
+	variable1.innerHTML =
+		"Latitude: " +
+		pos.coords.latitude +
+		"<br>Longitude: " +
+		pos.coords.longitude;
+	}
 
-} 
+    function updateDue() {
+    var lat = parseInt(document.getElementById("latitude").value);
+    var long = parseInt(document.getElementById("longitude").value);
 
+    // to make sure that they are numbers
+    if (!total) { total = 0; }
+    if (!val2) { val2 = 0; }
+
+    var ansD = document.getElementById("remainingval");
+    ansD.value = total - val2;
+    }
+
+	function errHand(err) {
+	switch (err.code) {
+		case err.PERMISSION_DENIED:
+		variable1.innerHTML =
+			"The application doesn't have the" +
+			"permission to make use of location services";
+		break;
+		case err.POSITION_UNAVAILABLE:
+		variable1.innerHTML = "The location of the device is uncertain";
+		break;
+		case err.TIMEOUT:
+		variable1.innerHTML = "The request to get user location timed out";
+		break;
+		case err.UNKNOWN_ERROR:
+		variable1.innerHTML =
+			"Time to fetch location information exceeded" +
+			"the maximum timeout interval";
+		break;
+	}
+	}
 </script>
-
 </body>
-
 </html>
