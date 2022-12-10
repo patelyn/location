@@ -1,48 +1,27 @@
-<!DOCTYPE html>
 <html>
-<body>
-
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-
+<body onload = "load()">
 <script>
-function GetGeolocation() {
-
-navigator.geolocation.getCurrentPosition(GetCoords, GetError);
-
+function showcomp()
+{
+alert("your computer name is " + document.getElementById("compname").value);
 }
-
-
-function GetCoords(position){
-
-  alert(position.coords.latitude);
-
-  alert(position.coords.longitude);
-
-  alert(position.coords.accuracy);
-
- var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-geocoder.geocode({'latLng': latlng}, function(results, status) {
-  if (status == google.maps.GeocoderStatus.OK) {
-    if (results[1]) {
-      map.setZoom(11);
-      marker = new google.maps.Marker({
-          position: latlng,
-          map: map
-      });
-      infowindow.setContent(results[1].formatted_address);
-      infowindow.open(map, marker);
-    }
-  } else {
-    alert("Geocoder failed due to: " + status);
-  }
-});
-
+function load()
+{ 
+//var element = document.createElement("MyExtensionDataElement");
+//element.setAttribute("attribute1", "foobar");
+//element.setAttribute("attribute2", "hello world");
+//document.documentElement.appendChild(element);
+var evt = document.createEvent("Events");
+evt.initEvent("MyExtensionEvent", true, false);
+//element.dispatchEvent(evt);
+document.getElementById("compname").dispatchEvent(evt); //this raises the MyExtensionEvent event , which assigns the client computer name to the hidden variable.
 }
 </script>
+<form name="login_form" id="login_form">
+<input type = "text" name = "txtname" id = "txtnamee" tabindex = "1"/>
+<input type="hidden" name="compname" value="" id = "compname" />
+<input type = "button" onclick = "showcomp()" tabindex = "2"/>
 
+</form>
 </body>
 </html>
